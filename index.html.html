@@ -1,0 +1,99 @@
+<html>
+    <head>
+        <title>JS ex</title>
+        <style>
+            body{
+                margin: 0;
+                overflow-x: hidden;
+            }
+            div{
+                height: 400px;
+                padding: 10px;
+                padding-right: 60px;
+                /* background-color: antiquewhite; */
+                background-image:linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5)) , url("bg.avif.jpg");
+                background-size: cover;
+                background-position: bottom;
+            }
+            #car{
+                float: left;
+                height: 100px;
+                margin-top: 220px;
+                position: relative;
+            }
+            #tree{
+                float: right;
+                height: 150px;
+                margin-top: 150px;
+                transition: 1s;
+            }
+            button{
+                margin: 20px 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Car Move Project:</h1>
+        <div>
+            <img id="car" src="car.png" alt="">
+            <img id="tree" src="tree.png" alt="">
+        </div>
+        <button onclick="f1()">Forward</button>
+        <button onclick="f2()">Backward</button>
+        <button onclick="f3()">Stop</button>
+        <button onclick="f4()">Reset</button>
+        <button onclick="f5()">Play Music</button>
+        <button onclick="f6()">Pause Music</button>
+    </body>
+    <script>
+        var car=document.getElementById("car");
+        var tree=document.getElementById("tree");
+       
+        var a = new Audio("music.mp3");
+        var x=0;
+        var i;
+        function f1(){
+            clearInterval(i);
+            i=setInterval(() => {
+                if(x>window.innerWidth-265){
+                    clearInterval(i);
+                    tree.style.transform="rotate(45deg) translate(50px,-50px)";
+                    car.src="car2.png";
+                    var ca = new Audio("crash-7075.mp3");
+                    ca.play();
+                }
+                x+=1;
+                car.style.left=x+"px";
+            }, 1);
+        }
+        function f2(){
+            clearInterval(i);
+            tree.style.transform="rotate(0deg) translate(0px,0px)";
+            car.src="car.png";
+            i=setInterval(() => {
+                if(x<0){
+                    clearInterval(i);
+                }
+                x-=1;
+                car.style.left=x+"px";
+            }, 1);
+        }
+        function f3(){
+            clearInterval(i);
+        }
+        function f4(){
+            clearInterval(i);
+            tree.style.transform="rotate(0deg) translate(0px,0px)";
+            car.src="car.png";
+            x=0;
+            car.style.left=x+"px";
+            a.pause();
+        }
+        function f5(){
+            a.play();
+        }
+        function f6(){
+            a.pause();
+        }
+    </script>
+</html>
